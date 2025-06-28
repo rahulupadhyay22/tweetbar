@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: tweet-app
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn chaiheadq.wsgi"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: chaiheadq.settings
+      - key: PYTHON_VERSION
+        value: 3.11
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: DATABASE_URL
+        fromDatabase:
+          name: tweet-db
+          property: connectionString
+
+databases:
+  - name: tweet-db
+    plan: free
