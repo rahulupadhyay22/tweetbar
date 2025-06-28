@@ -9,7 +9,7 @@ services:
       - key: DJANGO_SETTINGS_MODULE
         value: chaiheadq.settings
       - key: PYTHON_VERSION
-        value: 3.11
+        value: 3.11.5
       - key: SECRET_KEY
         generateValue: true
       - key: DEBUG
