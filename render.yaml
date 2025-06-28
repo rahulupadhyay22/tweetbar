@@ -3,7 +3,7 @@ services:
     name: tweet-app
     env: python
     plan: free
-    pythonVersion: 3.11
+    runtime: python3.11
     buildCommand: "chmod +x build.sh && ./build.sh"
     startCommand: "gunicorn chaiheadq.wsgi"
     envVars:

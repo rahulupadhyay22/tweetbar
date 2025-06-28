@@ -4,6 +4,8 @@
 set -o errexit
 
 echo "Installing dependencies..."
+pip install --upgrade pip
+pip install wheel setuptools
 pip install -r requirements.txt
 
 echo "Collecting static files..."
