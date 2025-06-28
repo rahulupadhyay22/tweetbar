@@ -61,7 +61,7 @@ def register(request):
             return redirect('tweet_list')
     else:
         form = UserRegistrationForm()
-    return render(request, 'registration/register.html ', {'form': form})
+    return render(request, 'registration/register.html', {'form': form})
 
 
     
