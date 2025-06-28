@@ -27,7 +27,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-tn%6f^50xcmj4haxkz6ni
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*']
+# Update allowed hosts for production
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com']
+
+# CSRF settings for secure deployment
+CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
 
 
 # Application definition
@@ -127,15 +131,32 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # WhiteNoise configuration for static files
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-#media files
+# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-#login urls
+# Security settings for production
+if not DEBUG:
+    # HTTPS settings
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+    
+    # HSTS settings
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    
+    # Content security
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
+
+# Login urls
 LOGIN_URL = '/accounts/login'
 LOGIN_REDIRECT_URL = '/tweet/'
 
-#logout urls
+# Logout urls
 LOGOUT_REDIRECT_URL = '/tweet/'
 
 # Default primary key field type

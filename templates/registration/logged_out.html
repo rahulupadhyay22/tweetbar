@@ -1,8 +1,26 @@
 {% extends "layout.html" %}
 
+{% block title %}
+    Logged Out | Tweetbar
+{% endblock %}
 
 {% block content %}
-
-    <h1 class="text-center">Logged Out </h1>
-    <p>You have been Logged Out from your account <a href="{% url 'login' %}"> Login again Here</a></p>
+<div class="auth-container text-center">
+    <div class="mb-4">
+        <i class="fas fa-check-circle text-success fa-4x"></i>
+    </div>
+    
+    <h2 class="auth-title">You've been logged out</h2>
+    
+    <p class="mb-4">Thank you for using Tweetbar. We hope to see you again soon!</p>
+    
+    <div class="d-grid gap-2">
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-sign-in-alt me-2"></i>Log in again
+        </a>
+        <a href="{% url 'tweet_list' %}" class="btn btn-outline-secondary">
+            <i class="fas fa-home me-2"></i>Return to home
+        </a>
+    </div>
+</div>
 {% endblock %}

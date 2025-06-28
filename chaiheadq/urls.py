@@ -18,12 +18,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.auth.urls import views as auth_views
+from django.contrib.auth import views as auth_views
 from tweet import views
+from tweet.forms import CustomLoginForm
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.tweet_list, name='tweet_list'),
+    path('', views.index, name='index'),
     path('tweet/', include('tweet.urls')),
+    path('accounts/login/', auth_views.LoginView.as_view(
+        authentication_form=CustomLoginForm,
+        redirect_authenticated_user=True
+    ), name='login'),
     path('accounts/', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

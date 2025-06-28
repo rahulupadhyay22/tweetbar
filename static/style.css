@@ -1,10 +1,246 @@
-.footer{
-    text-align: center;
-    padding: 0%;
-    background-color: #333;
+:root {
+    --primary-color: #1DA1F2;
+    --secondary-color: #14171A;
+    --background-color: #f7f9fa;
+    --text-color: #14171A;
+    --border-color: #e1e8ed;
+    --hover-color: #eaf5fd;
+    --accent-color: #794bc4;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding-bottom: 70px; /* Add padding to prevent content from being hidden by footer */
+}
+
+/* Navbar styling */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: white !important;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--primary-color) !important;
+}
+
+.nav-link {
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Container styling */
+.container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Tweet card styling */
+.tweet-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.tweet-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    width: 100%;
+    max-width: 500px;
+}
+
+.tweet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.tweet-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tweet-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 12px;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
+    font-weight: bold;
+}
+
+.tweet-username {
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.tweet-time {
+    font-size: 0.85rem;
+    color: #657786;
+}
+
+.tweet-content {
+    padding: 1rem;
+}
+
+.tweet-text {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.tweet-image {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+}
+
+.tweet-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem 1rem;
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #0d8ecf;
+    border-color: #0d8ecf;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Form styling */
+.form-control {
+    border-radius: 30px;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid var(--border-color);
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(29, 161, 242, 0.25);
+}
+
+/* Django form styling */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+    border-radius: 30px !important;
+    padding: 0.75rem 1.25rem !important;
+    border: 1px solid var(--border-color) !important;
+    width: 100% !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 0.2rem rgba(29, 161, 242, 0.25) !important;
+}
+
+.errorlist {
+    color: #dc3545;
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0.5rem;
+}
+
+/* Create tweet form */
+.tweet-form-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tweet-form-title {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* Authentication pages */
+.auth-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* Footer styling */
+.footer {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: white;
+    color: #657786;
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .tweet-container {
+        padding: 0;
+    }
+    
+    .tweet-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Animation for loading */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.loading {
+    animation: pulse 1.5s infinite ease-in-out;
 }
 

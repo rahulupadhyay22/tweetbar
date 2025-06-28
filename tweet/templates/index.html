@@ -1,10 +1,84 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    chaiheadq
+    Welcome to Tweetbar | Share your thoughts
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-center">Twitter Clone | Developed by Rahul Upadhyay</h1>
-    <p class="text-center">Twitter clone built with Django and SQLite.</p>
+<div class="row align-items-center py-5">
+    <div class="col-lg-6 mb-5 mb-lg-0">
+        <h1 class="display-4 fw-bold mb-4">Share your thoughts with the world</h1>
+        <p class="lead mb-4">Join Tweetbar today and connect with friends, share updates, and discover what's happening around you.</p>
+        
+        <div class="d-grid gap-3 d-md-flex justify-content-md-start">
+            {% if user.is_authenticated %}
+            <a href="{% url 'tweet_list' %}" class="btn btn-primary btn-lg px-4">
+                <i class="fas fa-stream me-2"></i>View Tweets
+            </a>
+            <a href="{% url 'tweet_create' %}" class="btn btn-outline-primary btn-lg px-4">
+                <i class="fas fa-feather-alt me-2"></i>Create Tweet
+            </a>
+            {% else %}
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg px-4">
+                <i class="fas fa-user-plus me-2"></i>Sign up
+            </a>
+            <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg px-4">
+                <i class="fas fa-sign-in-alt me-2"></i>Log in
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-lg">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="tweet-avatar me-3">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                    <div>
+                        <h5 class="mb-0">Tweetbar</h5>
+                        <small class="text-muted">@tweetbar</small>
+                    </div>
+                </div>
+                <p class="card-text mb-3">Welcome to Tweetbar! A modern Twitter clone built with Django and Bootstrap. Share your thoughts, photos, and connect with others in a beautiful, responsive interface.</p>
+                <img src="https://source.unsplash.com/random/600x400/?social,communication" class="img-fluid rounded" alt="Tweetbar">
+                <div class="d-flex justify-content-between mt-3">
+                    <div>
+                        <span class="me-3"><i class="far fa-heart text-danger"></i> 42</span>
+                        <span><i class="far fa-comment text-primary"></i> 12</span>
+                    </div>
+                    <span class="text-muted">Just now</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5 pt-5 text-center">
+    <div class="col-12">
+        <h2 class="mb-5">Why choose Tweetbar?</h2>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="p-4 bg-white rounded shadow-sm h-100">
+            <i class="fas fa-bolt text-primary fa-3x mb-3"></i>
+            <h3>Fast & Responsive</h3>
+            <p class="text-muted">Enjoy a seamless experience on any device with our modern, responsive design.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="p-4 bg-white rounded shadow-sm h-100">
+            <i class="fas fa-lock text-primary fa-3x mb-3"></i>
+            <h3>Secure & Private</h3>
+            <p class="text-muted">Your data is protected with industry-standard security practices.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="p-4 bg-white rounded shadow-sm h-100">
+            <i class="fas fa-users text-primary fa-3x mb-3"></i>
+            <h3>Growing Community</h3>
+            <p class="text-muted">Join thousands of users sharing their thoughts and connecting daily.</p>
+        </div>
+    </div>
+</div>
 {% endblock %}

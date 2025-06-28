@@ -1,27 +1,77 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    chaiheadq
+    Tweetbar | Home
 {% endblock %}
 
 {% block content %}
+<div class="row mb-4">
+    <div class="col-md-12 d-flex justify-content-between align-items-center">
+        <h2 class="mb-0"><i class="fas fa-stream me-2"></i>Latest Tweets</h2>
+        {% if user.is_authenticated %}
+        <a class="btn btn-primary" href="{% url 'tweet_create' %}">
+            <i class="fas fa-feather-alt me-2"></i>Create Tweet
+        </a>
+        {% endif %}
+    </div>
+</div>
 
-
-<a  class="btn btn-primary m-3"    href="{% url 'tweet_create' %}">Create a tweet</a>
-
-<div class="container row gap-3">
+<div class="tweet-container">
     {% for tweet in tweets %}
-    <div class="card" style="width: 18rem;">
-        <img src="{{tweet.photo.url}}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{tweet.user.username}}</h5>
-          <p class="card-text">{{tweet.text}}</p>
-          {% if tweet.user == user %}
-          <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
-          <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
-          {% endif %}
+    <div class="tweet-card">
+        <div class="tweet-header">
+            <div class="tweet-avatar">
+                {{ tweet.user.username|first|upper }}
+            </div>
+            <div>
+                <h5 class="tweet-username">{{ tweet.user.username }}</h5>
+                <p class="tweet-time">{{ tweet.created_at|date:"M d, Y" }} at {{ tweet.created_at|time:"g:i A" }}</p>
+            </div>
         </div>
-      </div>
+        <div class="tweet-content">
+            <p class="tweet-text">{{ tweet.text }}</p>
+            {% if tweet.photo %}
+            <img src="{{ tweet.photo.url }}" class="tweet-image" alt="Tweet image">
+            {% endif %}
+        </div>
+        <div class="tweet-actions">
+            <div>
+                <button class="btn btn-sm btn-outline-primary me-2">
+                    <i class="far fa-heart me-1"></i> Like
+                </button>
+                <button class="btn btn-sm btn-outline-primary">
+                    <i class="far fa-comment me-1"></i> Reply
+                </button>
+            </div>
+            {% if tweet.user == user %}
+            <div>
+                <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-sm btn-outline-primary">
+                    <i class="fas fa-edit me-1"></i> Edit
+                </a>
+                <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-sm btn-outline-danger">
+                    <i class="fas fa-trash-alt me-1"></i> Delete
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center my-5">
+        <div class="p-5 bg-white rounded shadow-sm">
+            <i class="fas fa-feather-alt fa-3x text-muted mb-3"></i>
+            <h3>No tweets yet</h3>
+            <p class="text-muted">Be the first to share your thoughts!</p>
+            {% if user.is_authenticated %}
+            <a href="{% url 'tweet_create' %}" class="btn btn-primary mt-3">
+                <i class="fas fa-feather-alt me-2"></i>Create First Tweet
+            </a>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary mt-3">
+                <i class="fas fa-sign-in-alt me-2"></i>Login to Tweet
+            </a>
+            {% endif %}
+        </div>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}
