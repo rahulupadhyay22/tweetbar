@@ -80,7 +80,6 @@ WSGI_APPLICATION = 'chaiheadq.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 # Database configuration - use SQLite locally, PostgreSQL in production
 if DEBUG:
     DATABASES = {
@@ -90,11 +89,12 @@ if DEBUG:
         }
     }
 else:
-    # Use DATABASE_URL environment variable for production
     DATABASES = {
         'default': dj_database_url.config(
+            default=os.environ.get("DATABASE_URL"),  # fallback if DATABASE_URL not set
             conn_max_age=600,
             conn_health_checks=True,
+            ssl_require=True,  # important for production security
         )
     }
 
