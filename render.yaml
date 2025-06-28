@@ -3,9 +3,8 @@ services:
     name: tweet-app
     env: python
     plan: free
-    runtime: python3.11
     buildCommand: "chmod +x build.sh && ./build.sh"
-    startCommand: "gunicorn chaiheadq.wsgi"
+    startCommand: "gunicorn chaiheadq.wsgi:application"
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: chaiheadq.settings
